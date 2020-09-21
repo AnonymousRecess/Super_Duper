@@ -3,10 +3,12 @@
 (define (Super_Duper source count)
 	(if (null? source)
 		source
-		(Copy_It source count)))
+		(cons(Copy_It source count) (cdr source))))
+
+
 (define (Copy_It source count)
 	(if (not (= 0 count))
-		(cons (car source) (Copy_It source (- count 1)))
+		(cons (car source) (Copy_It (cdr source) (- count 1)))
 		(Super_Duper(cdr source) count)))
 
-(display(Super_Duper '(x y) 2))
+(display(Super_Duper '(xy) 2))

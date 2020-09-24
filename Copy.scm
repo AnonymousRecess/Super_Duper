@@ -1,22 +1,21 @@
-;;Copy program
+(define (duper source count)
+	(define (super nextSource remaining)
+		(if (= remaining 0)
 
-(define (Copy source count)
-	(if (null? source)
-		'()
-		(if (not (= count 0))
-		(cons
-		(car source )
-			(Copy source (- count 1)))
-		'()
-		)))
-		
+			(cons(duper (car nextSource )  (- remaining 1)) (duper (cdr nextSource) (- 1 remaining)))
 
-(define (Single newsource counts)
-	(if (null? newsource)
-		'()
-		(cons
-		(Copy newsource counts)
-		(Single (cdr newsource) counts))))
 
-;(display(Copy '(xy) 3))
-(display(Single '(xy sa) 3))
+
+			(cons (car source)  (super nextSource (- remaining 1)))
+		)
+	)
+
+			(if (pair? source)
+				(super source   count )
+				source
+			)
+)
+	
+(display(duper '((sa) a) 3))
+
+
